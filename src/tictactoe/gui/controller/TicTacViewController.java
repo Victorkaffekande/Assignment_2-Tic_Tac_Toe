@@ -29,7 +29,7 @@ public class TicTacViewController implements Initializable {
     private ChoiceBox<GameBoardFactory.GAME_MODE> choicePlayMode;
 
     @FXML
-    private ListView lstScores;
+    private ListView<String> lstScores;
 
     @FXML
     private Label lblPlayer;
@@ -76,8 +76,7 @@ public class TicTacViewController implements Initializable {
             Integer col = GridPane.getColumnIndex((Node) event.getSource());
             int r = (row == null) ? 0 : row;
             int c = (col == null) ? 0 : col;
-            if (game.play(c, r))
-            {
+            if (game.play(c, r)) {
                 if (game.isGameOver()) {
                     int winner = game.getWinner();
                     displayWinner(winner);
@@ -102,15 +101,14 @@ public class TicTacViewController implements Initializable {
         int c;
         int r;
         int player;
-        for(Node n : gridPane.getChildren())
-        {
+        for (Node n : gridPane.getChildren()) {
             Button btn = (Button) n;
             row = GridPane.getRowIndex(n);
             col = GridPane.getColumnIndex(n);
             r = (row == null) ? 0 : row;
             c = (col == null) ? 0 : col;
-            player = game.getPlayerAt(c,r);
-            if(player != -1) {
+            player = game.getPlayerAt(c, r);
+            if (player != -1) {
                 String xOrO = player == 0 ? "X" : "O";
                 btn.setText(xOrO);
             }
@@ -118,10 +116,10 @@ public class TicTacViewController implements Initializable {
     }
 
     /**
-     * Eventhandler that is called whenever the players want's to start a new game.
+     * Event handler that is called whenever the players want's to start a new game.
      * The method will switch game mode if the player has chosen so.
      *
-     * @param event
+     * @param event The action event performed by the user.
      */
     @FXML
     private void handleNewGame(ActionEvent event) {
@@ -145,17 +143,14 @@ public class TicTacViewController implements Initializable {
     /**
      * Updates the label to display the winner of the game.
      *
-     * @param winner
+     * @param winner The integer value of the player who won the game.
      */
     private void displayWinner(int winner) {
-        String message = "";
-        switch (winner) {
-            case -1:
-                message = "It's a draw :-(";
-                break;
-            default:
-                message = "Player " + winner + " wins!!!";
-                break;
+        String message;
+        if (winner == -1) {
+            message = "It's a draw :-(";
+        } else {
+            message = "Player " + winner + " wins!!!";
         }
         lblPlayer.setText(message);
     }

@@ -41,7 +41,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      * Tells us if the game has ended either by draw or by meeting the winning
      * condition.
      *
-     * @return true if the game is over, else it will retun false.
+     * @return true if the game is over, else it will return false.
      */
     @Override
     public boolean isGameOver() {

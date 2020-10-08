@@ -2,7 +2,8 @@ package tictactoe.bll;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This is a test Class. You can use it to validate that your GameBoardTwoPlayer class works as intended.
@@ -110,8 +111,7 @@ class GameBoardTwoPlayerTest {
      * Test of getWinner method, of class GameBoard.
      */
     @Test
-    public void testGetWinnerPlayerZeroVeritcal()
-    {
+    public void testGetWinnerPlayerZeroVertical() {
         IGameModel instance = new GameBoardTwoPlayer();
         int expResult = 0;
 

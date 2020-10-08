@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 
 public class ScoreModel {
 
-    private ObservableList<String> winners;
+    private final ObservableList<String> winners;
 
     public ScoreModel() {
         winners = FXCollections.observableArrayList();
