@@ -67,4 +67,17 @@ public class GameBoardSinglePlayer implements IGameModel {
     public void newGame() {
         //TODO Implement this method
     }
+
+    /**
+     * Returns the value representing which players has played the given field.
+     *
+     * @param col The column to look at.
+     * @param row The row to look at.
+     * @return Will return 0 if player 0 has played the field, 1 for player one, and -1 if no player has played the field.
+     */
+    @Override
+    public int getPlayerAt(int col, int row) {
+        //TODO Implement this method
+        return -1;
+    }
 }

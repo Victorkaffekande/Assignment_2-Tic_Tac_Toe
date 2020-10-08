@@ -76,21 +76,43 @@ public class TicTacViewController implements Initializable {
             Integer col = GridPane.getColumnIndex((Node) event.getSource());
             int r = (row == null) ? 0 : row;
             int c = (col == null) ? 0 : col;
-            int player = game.getNextPlayer();
             if (game.play(c, r)) {
-                Button btn = (Button) event.getSource();
-                String xOrO = player == 0 ? "X" : "O";
-                btn.setText(xOrO);
                 if (game.isGameOver()) {
                     int winner = game.getWinner();
                     displayWinner(winner);
-                    scoreModel.setNextWinner(xOrO);
+                    scoreModel.setNextWinner(winner + "");
                 } else {
                     setPlayer();
                 }
+                updateGameBoardButtons();
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method will update the user interface buy asking the GameBoard for who have played the individual field.
+     * This is necessary when playing the single player game.
+     */
+    private void updateGameBoardButtons() {
+        Integer col;
+        Integer row;
+        int c;
+        int r;
+        int player;
+        for(Node n : gridPane.getChildren())
+        {
+            Button btn = (Button) n;
+            row = GridPane.getRowIndex(n);
+            col = GridPane.getColumnIndex(n);
+            r = (row == null) ? 0 : row;
+            c = (col == null) ? 0 : col;
+            player = game.getPlayerAt(r,c);
+            if(player != -1) {
+                String xOrO = player == 0 ? "X" : "O";
+                btn.setText(xOrO);
+            }
         }
     }
 

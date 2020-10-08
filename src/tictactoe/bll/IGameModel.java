@@ -50,4 +50,12 @@ public interface IGameModel
      * Resets the game to a new game state.
      */
     void newGame();
+
+    /**
+     * Returns the value representing which players has played the given field.
+     * @param col The column to look at.
+     * @param row The row to look at.
+     * @return Will return 0 if player 0 has played the field, 1 for player one, and -1 if no player has played the field.
+     */
+    int getPlayerAt(int col, int row);
 }
