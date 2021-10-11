@@ -6,7 +6,10 @@ package tictactoe.bll;
  */
 public class GameBoardTwoPlayer implements IGameModel {
 
-    protected GameBoardTwoPlayer() {
+    int player = 1;
+
+    protected GameBoardTwoPlayer()
+    {
 
     }
 
@@ -18,7 +21,11 @@ public class GameBoardTwoPlayer implements IGameModel {
     @Override
     public int getNextPlayer() {
         //TODO Implement this method
-        return 0;
+        if(player == 0)
+            player = 1;
+        else if(player == 1)
+            player = 0;
+        return player;
     }
 
     /**
@@ -34,6 +41,7 @@ public class GameBoardTwoPlayer implements IGameModel {
     @Override
     public boolean play(int col, int row) {
         //TODO Implement this method
+
         return true;
     }
 
@@ -76,7 +84,8 @@ public class GameBoardTwoPlayer implements IGameModel {
      * @return Will return 0 if player 0 has played the field, 1 for player one, and -1 if no player has played the field.
      */
     @Override
-    public int getPlayerAt(int col, int row) {
+    public int getPlayerAt(int col, int row)
+    {
         //TODO Implement this method
         return -1;
     }
