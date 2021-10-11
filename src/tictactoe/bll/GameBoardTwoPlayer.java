@@ -2,6 +2,8 @@ package tictactoe.bll;
 
 import tictactoe.gui.controller.TicTacViewController;
 
+import java.util.Arrays;
+
 /**
  * The GameBoardTwoPlayer class is the mandatory implementation for the TicTacToe assignment.
  * It is used for games where there are two human players.
@@ -11,6 +13,7 @@ public class GameBoardTwoPlayer implements IGameModel {
     int player = 1;
     int STARTING_VALUE = -1;
     int gameBoard[][]  = new int[3][3] ;
+    int winner = -1;
 
     protected GameBoardTwoPlayer()
     {
@@ -31,6 +34,8 @@ public class GameBoardTwoPlayer implements IGameModel {
         gameBoard[2][0] = STARTING_VALUE;
         gameBoard[2][1] = STARTING_VALUE;
         gameBoard[2][2] = STARTING_VALUE;
+
+
     }
 
     /**
@@ -78,6 +83,23 @@ public class GameBoardTwoPlayer implements IGameModel {
     @Override
     public boolean isGameOver() {
         //TODO CLEAR THE ARRAY!!!!! 12/10
+
+        //missing draw
+
+        //player 1 or 2 win
+        if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()){
+            System.out.println("test");
+
+            if (player == 0){
+                winner = player;
+            }
+            else
+            if(player == 1){
+                winner = player;
+            }
+
+            return true;
+        }
         return false;
     }
 
@@ -89,7 +111,40 @@ public class GameBoardTwoPlayer implements IGameModel {
     @Override
     public int getWinner() {
         //TODO Implement this method
-        return -1;
+
+        return winner;
+    }
+
+    //rows
+    private boolean checkRowsForWin() {
+        for (int i = 0; i < 3; i++) {
+            if (checkRowCol(gameBoard[i][0], gameBoard[i][1], gameBoard[i][2])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //cols
+    private boolean checkColumnsForWin() {
+        for (int i = 0; i < 3; i++) {
+            if (checkRowCol(gameBoard[0][i], gameBoard[1][i], gameBoard[2][i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //diagonals
+    private boolean checkDiagonalsForWin() {
+        return ((checkRowCol(gameBoard[0][0], gameBoard[1][1], gameBoard[2][2])) || (checkRowCol(gameBoard[0][2], gameBoard[1][1], gameBoard[2][0])));
+    }
+
+    /**
+    checks if a row / col has the same value
+     */
+    private boolean checkRowCol(int c1, int c2, int c3) {
+        return ((c1 != -1) && (c1 == c2) && (c2 == c3));
     }
 
     /**
@@ -97,7 +152,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public void newGame() {
-        //TODO Implement this method
+        gameBoardArray();
     }
 
     /**
