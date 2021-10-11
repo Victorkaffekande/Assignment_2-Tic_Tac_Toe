@@ -7,10 +7,28 @@ package tictactoe.bll;
 public class GameBoardTwoPlayer implements IGameModel {
 
     int player = 1;
+    int STARTING_VALUE = -1;
+    int gameBoard[][]  = new int[3][3] ;
 
     protected GameBoardTwoPlayer()
     {
+        gameBoardArray();
+    }
 
+    /**
+     * This is the array of our gameboard (gridpane)
+     */
+    public void gameBoardArray()
+    {
+        gameBoard[0][0] = STARTING_VALUE;
+        gameBoard[0][1] = STARTING_VALUE;
+        gameBoard[0][2] = STARTING_VALUE;
+        gameBoard[1][0] = STARTING_VALUE;
+        gameBoard[1][1] = STARTING_VALUE;
+        gameBoard[1][2] = STARTING_VALUE;
+        gameBoard[2][0] = STARTING_VALUE;
+        gameBoard[2][1] = STARTING_VALUE;
+        gameBoard[2][2] = STARTING_VALUE;
     }
 
     /**
@@ -20,7 +38,6 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getNextPlayer() {
-        //TODO Implement this method
         if(player == 0)
             player = 1;
         else if(player == 1)
@@ -40,9 +57,12 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        //TODO Implement this method
+        if(gameBoard[col][row] == STARTING_VALUE)
+        {
+            gameBoard[col][row] = player;
+        }
+            return true;
 
-        return true;
     }
 
     /**
