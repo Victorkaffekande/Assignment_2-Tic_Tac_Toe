@@ -1,5 +1,7 @@
 package tictactoe.bll;
 
+import tictactoe.gui.controller.TicTacViewController;
+
 /**
  * The GameBoardTwoPlayer class is the mandatory implementation for the TicTacToe assignment.
  * It is used for games where there are two human players.
@@ -60,7 +62,9 @@ public class GameBoardTwoPlayer implements IGameModel {
         if(gameBoard[col][row] == STARTING_VALUE)
         {
             gameBoard[col][row] = player;
+
         }
+
             return true;
 
     }
@@ -73,7 +77,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean isGameOver() {
-        //TODO Implement this method
+        //TODO CLEAR THE ARRAY!!!!! 12/10
         return false;
     }
 
@@ -104,10 +108,19 @@ public class GameBoardTwoPlayer implements IGameModel {
      * @return Will return 0 if player 0 has played the field, 1 for player one, and -1 if no player has played the field.
      */
     @Override
-    public int getPlayerAt(int col, int row)
-    {
-        //TODO Implement this method
-        return -1;
+    public int getPlayerAt(int col, int row) {
+        if (gameBoard[col][row] == STARTING_VALUE)
+        {
+            return -1;
+        }
+        else if (gameBoard[col][row] == 0)
+        {
+            return 0;
+        }
+        else if (gameBoard[col][row] == 1)
+        {
+            return 1;
+        }
+    return -1;
     }
-
 }
