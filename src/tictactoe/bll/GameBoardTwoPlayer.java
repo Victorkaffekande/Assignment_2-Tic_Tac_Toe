@@ -62,11 +62,11 @@ public class GameBoardTwoPlayer implements IGameModel {
         if(gameBoard[col][row] == STARTING_VALUE)
         {
             gameBoard[col][row] = player;
-
+            return true;
         }
 
-            return true;
 
+        return false;
     }
 
     /**
