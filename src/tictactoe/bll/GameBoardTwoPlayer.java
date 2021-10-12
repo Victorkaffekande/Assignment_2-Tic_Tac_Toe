@@ -3,6 +3,7 @@ package tictactoe.bll;
 import tictactoe.gui.controller.TicTacViewController;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * The GameBoardTwoPlayer class is the mandatory implementation for the TicTacToe assignment.
@@ -82,13 +83,20 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean isGameOver() {
-        //TODO CLEAR THE ARRAY!!!!! 12/10
-
         //missing draw
+
+        int count=0;
+        for (int i = 0; i< 3; i++){
+            for (int n =0; n < 3; n++){
+                if (gameBoard[i][n] != STARTING_VALUE) {
+                    count++;
+
+                }
+            }
+        }
 
         //player 1 or 2 win
         if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()){
-            System.out.println("test");
 
             if (player == 0){
                 winner = player;
@@ -100,6 +108,11 @@ public class GameBoardTwoPlayer implements IGameModel {
 
             return true;
         }
+        if (count == 9){
+            winner = -1;
+            return true;
+
+        }
         return false;
     }
 
@@ -110,8 +123,6 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getWinner() {
-        //TODO Implement this method
-
         return winner;
     }
 
@@ -144,7 +155,7 @@ public class GameBoardTwoPlayer implements IGameModel {
     checks if a row / col has the same value
      */
     private boolean checkRowCol(int c1, int c2, int c3) {
-        return ((c1 != -1) && (c1 == c2) && (c2 == c3));
+        return ((c1 != STARTING_VALUE) && (c1 == c2) && (c2 == c3));
     }
 
     /**
