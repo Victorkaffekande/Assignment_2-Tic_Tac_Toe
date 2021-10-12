@@ -83,18 +83,16 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean isGameOver() {
-        //missing draw
 
+        //check for empty fields
         int count=0;
         for (int i = 0; i< 3; i++){
             for (int n =0; n < 3; n++){
                 if (gameBoard[i][n] != STARTING_VALUE) {
                     count++;
-
                 }
             }
         }
-
         //player 1 or 2 win
         if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()){
 
