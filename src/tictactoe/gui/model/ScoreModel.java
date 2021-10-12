@@ -33,5 +33,4 @@ public class ScoreModel {
 
         winners.add(output);
     }
-
 }
