@@ -35,8 +35,6 @@ public class GameBoardTwoPlayer implements IGameModel {
         gameBoard[2][0] = STARTING_VALUE;
         gameBoard[2][1] = STARTING_VALUE;
         gameBoard[2][2] = STARTING_VALUE;
-
-
     }
 
     /**
@@ -65,7 +63,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        if(isGameOver() == true)
+        if(isGameOver())
         {
             return false;
         }
