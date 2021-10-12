@@ -22,7 +22,7 @@ public class GameBoardTwoPlayer implements IGameModel {
     }
 
     /**
-     * This is the array of our gameboard (gridpane)
+     * This is the definition of the starting value, for every button of the gameBoard.
      */
     public void gameBoardArray()
     {
@@ -54,7 +54,7 @@ public class GameBoardTwoPlayer implements IGameModel {
     }
 
     /**
-     * Attempts to let the current player play at the given coordinates. It the
+     * Attempts to let the current player play at the given coordinates. If the
      * attempt is successful the current player has ended his turn and it is the
      * next players turn.
      *
@@ -65,12 +65,16 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
+        if(isGameOver() == true)
+        {
+            return false;
+        }
+
         if(gameBoard[col][row] == STARTING_VALUE)
         {
             gameBoard[col][row] = player;
             return true;
         }
-
 
         return false;
     }
@@ -84,29 +88,29 @@ public class GameBoardTwoPlayer implements IGameModel {
     @Override
     public boolean isGameOver() {
 
-        //check for empty fields
-        int count=0;
+        //check for empty fields with "for" loops
+        int count=9;
         for (int i = 0; i< 3; i++){
             for (int n =0; n < 3; n++){
                 if (gameBoard[i][n] != STARTING_VALUE) {
-                    count++;
+                    count--;
                 }
             }
         }
-        //player 1 or 2 win
+        //Does player 0 or 1 win, or is it a draw
         if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()){
 
             if (player == 0){
                 winner = player;
+
             }
             else
             if(player == 1){
                 winner = player;
             }
-
             return true;
         }
-        if (count == 9){
+        if (count == 0){
             winner = -1;
             return true;
 
@@ -124,7 +128,19 @@ public class GameBoardTwoPlayer implements IGameModel {
         return winner;
     }
 
-    //rows
+    /**
+     checks if a row / col has the same value
+     */
+    private boolean checkRowCol(int c1, int c2, int c3) {
+        return ((c1 != STARTING_VALUE) && (c1 == c2) && (c2 == c3));
+    }
+
+
+    /**
+     * Checks the rows for a possible win.
+     *
+     * @return true if there is three matching symbols in a row
+     */
     private boolean checkRowsForWin() {
         for (int i = 0; i < 3; i++) {
             if (checkRowCol(gameBoard[i][0], gameBoard[i][1], gameBoard[i][2])) {
@@ -134,7 +150,11 @@ public class GameBoardTwoPlayer implements IGameModel {
         return false;
     }
 
-    //cols
+    /**
+     * Checks the columns for a possible win.
+     *
+     * @return true if there is three matching symbols in a column
+     */
     private boolean checkColumnsForWin() {
         for (int i = 0; i < 3; i++) {
             if (checkRowCol(gameBoard[0][i], gameBoard[1][i], gameBoard[2][i])) {
@@ -144,17 +164,15 @@ public class GameBoardTwoPlayer implements IGameModel {
         return false;
     }
 
-    //diagonals
+    /**
+     * Checks the diagonals for a possible win.
+     *
+     * @return true if there is three matching symbols in a diagonal
+     */
     private boolean checkDiagonalsForWin() {
         return ((checkRowCol(gameBoard[0][0], gameBoard[1][1], gameBoard[2][2])) || (checkRowCol(gameBoard[0][2], gameBoard[1][1], gameBoard[2][0])));
     }
 
-    /**
-    checks if a row / col has the same value
-     */
-    private boolean checkRowCol(int c1, int c2, int c3) {
-        return ((c1 != STARTING_VALUE) && (c1 == c2) && (c2 == c3));
-    }
 
     /**
      * Resets the game to a new game state.
