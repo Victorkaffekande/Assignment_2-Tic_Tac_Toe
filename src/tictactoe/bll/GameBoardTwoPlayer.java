@@ -13,17 +13,19 @@ public class GameBoardTwoPlayer implements IGameModel {
 
     int player = 1;
     int STARTING_VALUE = -1;
-    int gameBoard[][] = new int[3][3];
+    int gameBoard[][]  = new int[3][3] ;
     int winner = -1;
 
-    protected GameBoardTwoPlayer() {
+    protected GameBoardTwoPlayer()
+    {
         gameBoardArray();
     }
 
     /**
      * This is the definition of the starting value, for every button of the gameBoard.
      */
-    public void gameBoardArray() {
+    public void gameBoardArray()
+    {
         gameBoard[0][0] = STARTING_VALUE;
         gameBoard[0][1] = STARTING_VALUE;
         gameBoard[0][2] = STARTING_VALUE;
@@ -33,6 +35,8 @@ public class GameBoardTwoPlayer implements IGameModel {
         gameBoard[2][0] = STARTING_VALUE;
         gameBoard[2][1] = STARTING_VALUE;
         gameBoard[2][2] = STARTING_VALUE;
+
+
     }
 
     /**
@@ -42,9 +46,9 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getNextPlayer() {
-        if (player == 0)
+        if(player == 0)
             player = 1;
-        else if (player == 1)
+        else if(player == 1)
             player = 0;
         return player;
     }
@@ -61,11 +65,13 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        if (isGameOver()) {
+        if(isGameOver() == true)
+        {
             return false;
         }
 
-        if (gameBoard[col][row] == STARTING_VALUE) {
+        if(gameBoard[col][row] == STARTING_VALUE)
+        {
             gameBoard[col][row] = player;
             return true;
         }
@@ -81,23 +87,34 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean isGameOver() {
-        //Does player 0 or 1 win, or is it a draw
-        if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()) {
 
-            if (player == 0) {
+        //check for empty fields with "for" loops
+        int count=9;
+        for (int i = 0; i< 3; i++){
+            for (int n =0; n < 3; n++){
+                if (gameBoard[i][n] != STARTING_VALUE) {
+                    count--;
+                }
+            }
+        }
+        //Does player 0 or 1 win, or is it a draw
+        if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()){
+
+            if (player == 0){
                 winner = player;
-            } else if (player == 1) {
+
+            }
+            else
+            if(player == 1){
                 winner = player;
             }
             return true;
         }
-
-        if (checkDraw()) {
+        if (count == 0){
             winner = -1;
             return true;
+
         }
-
-
         return false;
     }
 
@@ -111,27 +128,8 @@ public class GameBoardTwoPlayer implements IGameModel {
         return winner;
     }
 
-    public boolean checkDraw() {
-        //check for empty fields with "for" loop
-        int count = 9;
-        for (int i = 0; i < 3; i++) {
-            for (int n = 0; n < 3; n++) {
-                if (gameBoard[i][n] != STARTING_VALUE) {
-                    count--;
-                }
-            }
-        }
-
-        if (count == 0) {
-            winner = -1;
-            return true;
-
-        }
-        return false;
-    }
-
     /**
-     * checks if a row / col has the same value
+     checks if a row / col has the same value
      */
     private boolean checkRowCol(int c1, int c2, int c3) {
         return ((c1 != STARTING_VALUE) && (c1 == c2) && (c2 == c3));
@@ -193,13 +191,18 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getPlayerAt(int col, int row) {
-        if (gameBoard[col][row] == STARTING_VALUE) {
+        if (gameBoard[col][row] == STARTING_VALUE)
+        {
             return -1;
-        } else if (gameBoard[col][row] == 0) {
+        }
+        else if (gameBoard[col][row] == 0)
+        {
             return 0;
-        } else if (gameBoard[col][row] == 1) {
+        }
+        else if (gameBoard[col][row] == 1)
+        {
             return 1;
         }
-        return -1;
+    return -1;
     }
 }
