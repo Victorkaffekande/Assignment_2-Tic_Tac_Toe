@@ -23,19 +23,14 @@ public class ScoreModel {
      * @param winner
      */
     public void setNextWinner(String winner) {
-        String output = "";
-
-
-        if(Objects.equals(winner, "-1")){
-            output = "Draw";
-        }
-        if (Objects.equals(winner, "0")){
-            output = "Player 0 Wins";
-        }
-        if (Objects.equals(winner, "1")){
-           output = "Player 1 Wins";
-        }
-
+        String output = switch (winner) {
+            case "-1" -> "Draw";
+            case "0" -> "Player 0 wins";
+            case "1" -> "Player 1 wins";
+            case "2" -> "Human wins";
+            case "3" -> "Computer Wins";
+            default -> "";
+        };
         winners.add(output);
     }
 }

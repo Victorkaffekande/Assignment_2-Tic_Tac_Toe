@@ -10,6 +10,8 @@ public class GameBoardSinglePlayer implements IGameModel {
 
     int startingPlayer = 1;
     int player;
+    int playerWin = 2;
+    int aiWin = 3;
     int STARTING_VALUE = -1;
     int gameBoard[][]  = new int[3][3] ;
     static Random randomR = new Random();
@@ -110,12 +112,12 @@ public class GameBoardSinglePlayer implements IGameModel {
         if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()){
 
             if (player == 0){
-                winner = player;
+                winner = playerWin;
 
             }
             else
             if(player == 1){
-                winner = player;
+                winner = aiWin;
             }
             return true;
         }
