@@ -68,27 +68,20 @@ public class GameBoardSinglePlayer implements IGameModel {
         if(gameBoard[col][row] == STARTING_VALUE)
         {
             gameBoard[col][row] = player;
-            int guessRow;
-            int guessCol;
-            do {
-                guessRow = guessRow();
-                guessCol = guessCol();
-            } while (gameBoard[guessCol][guessRow] != STARTING_VALUE);
-
+            //TODO lav en AI, der kan se hvilke felter den må sætte et tegn på og så sæt det på et random sted.
 
             return true;
-
         }
-
         return false;
     }
 
+
     public static int guessRow(){
-        return randomR.nextInt(2);
+        return randomR.nextInt(3);
 
     }
     public static int guessCol(){
-        return randomC.nextInt(2);
+        return randomC.nextInt(3);
     }
     /**
      * Tells us if the game has ended either by draw or by meeting the winning
