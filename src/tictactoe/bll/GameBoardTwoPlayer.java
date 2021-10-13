@@ -11,14 +11,15 @@ import java.util.List;
  */
 public class GameBoardTwoPlayer implements IGameModel {
 
-    int player = 1;
+    int startingPlayer = 1;
+    int player;
     int STARTING_VALUE = -1;
     int gameBoard[][]  = new int[3][3] ;
     int winner = -1;
 
     protected GameBoardTwoPlayer()
     {
-        gameBoardArray();
+        newGame();
     }
 
     /**
@@ -26,6 +27,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     public void gameBoardArray()
     {
+
         gameBoard[0][0] = STARTING_VALUE;
         gameBoard[0][1] = STARTING_VALUE;
         gameBoard[0][2] = STARTING_VALUE;
@@ -87,16 +89,6 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean isGameOver() {
-
-        //check for empty fields with "for" loops
-        int count=9;
-        for (int i = 0; i< 3; i++){
-            for (int n =0; n < 3; n++){
-                if (gameBoard[i][n] != STARTING_VALUE) {
-                    count--;
-                }
-            }
-        }
         //Does player 0 or 1 win, or is it a draw
         if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()){
 
@@ -110,11 +102,12 @@ public class GameBoardTwoPlayer implements IGameModel {
             }
             return true;
         }
-        if (count == 0){
+
+        if (checkDraw()){
             winner = -1;
             return true;
-
         }
+
         return false;
     }
 
@@ -126,6 +119,24 @@ public class GameBoardTwoPlayer implements IGameModel {
     @Override
     public int getWinner() {
         return winner;
+    }
+
+    public boolean checkDraw(){
+        //check for empty fields with "for" loop
+        int count=9;
+        for (int i = 0; i< 3; i++){
+            for (int n =0; n < 3; n++){
+                if (gameBoard[i][n] != STARTING_VALUE) {
+                    count--;
+                }
+            }
+        }
+
+        if (count == 0){
+            return true;
+
+        }
+        return false;
     }
 
     /**
@@ -179,6 +190,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public void newGame() {
+        player = startingPlayer;
         gameBoardArray();
     }
 

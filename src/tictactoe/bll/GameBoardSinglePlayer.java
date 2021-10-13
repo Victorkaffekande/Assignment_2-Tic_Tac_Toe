@@ -8,15 +8,17 @@ import java.util.Random;
  */
 public class GameBoardSinglePlayer implements IGameModel {
 
-    int player = 1;
+    int startingPlayer = 1;
+    int player;
     int STARTING_VALUE = -1;
     int gameBoard[][]  = new int[3][3] ;
     static Random randomR = new Random();
     static Random randomC = new Random();
+    int winner = -1;
 
     protected GameBoardSinglePlayer()
     {
-
+        newGame();
     }
     public void gameBoardArray()
     {
@@ -39,11 +41,10 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public int getNextPlayer() {
-        if(player == 1)
-            player = 0;
-
-        else if (player == 0)
+        if(player == 0)
             player = 1;
+        else if(player == 1)
+            player = 0;
         return player;
     }
 
@@ -59,7 +60,7 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-
+//TODO lav en AI, der kan se hvilke felter den må sætte et tegn på og så sæt det på et random sted.
         if(isGameOver())
         {
             return false;
@@ -68,13 +69,26 @@ public class GameBoardSinglePlayer implements IGameModel {
         if(gameBoard[col][row] == STARTING_VALUE)
         {
             gameBoard[col][row] = player;
-            //TODO lav en AI, der kan se hvilke felter den må sætte et tegn på og så sæt det på et random sted.
-
-            return true;
+            if (isGameOver()){
+                return true;
+            }else{
+                AiPlay();
+                return true;
+            }
         }
         return false;
     }
 
+    public void AiPlay(){
+        getNextPlayer();
+        int guessC;
+        int guessR;
+        do{
+            guessC = guessCol();
+            guessR = guessRow();
+        }while (gameBoard[guessC][guessR] != STARTING_VALUE);
+        gameBoard[guessC][guessR] = player;
+    }
 
     public static int guessRow(){
         return randomR.nextInt(3);
@@ -91,7 +105,26 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public boolean isGameOver() {
-        //TODO Implement this method
+
+        //Does player 0 or 1 win, or is it a draw
+        if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()){
+
+            if (player == 0){
+                winner = player;
+
+            }
+            else
+            if(player == 1){
+                winner = player;
+            }
+            return true;
+        }
+
+        if (checkDraw()){
+            winner = -1;
+            return true;
+        }
+
         return false;
     }
 
@@ -102,9 +135,27 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public int getWinner() {
-        //TODO Implement this method
-        return 0;
+        return winner;
     }
+
+    public boolean checkDraw(){
+        //check for empty fields with "for" loop
+        int count=9;
+        for (int i = 0; i< 3; i++){
+            for (int n =0; n < 3; n++){
+                if (gameBoard[i][n] != STARTING_VALUE) {
+                    count--;
+                }
+            }
+        }
+
+        if (count == 0){
+            return true;
+
+        }
+        return false;
+    }
+
     /**
      checks if a row / col has the same value
      */
@@ -154,7 +205,10 @@ public class GameBoardSinglePlayer implements IGameModel {
      * Resets the game to a new game state.
      */
     @Override
-    public void newGame() {gameBoardArray();}
+    public void newGame() {
+        player = startingPlayer;
+        gameBoardArray();
+    }
 
 
 
