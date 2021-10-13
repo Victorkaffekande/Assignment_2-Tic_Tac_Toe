@@ -8,12 +8,12 @@ import java.util.Random;
  */
 public class GameBoardSinglePlayer implements IGameModel {
 
-    int startingPlayer = 1;
+    final int STARTINGPLAYER = 1;
     int player;
-    int playerWin = 2;
-    int aiWin = 3;
-    int STARTING_VALUE = -1;
-    int gameBoard[][]  = new int[3][3] ;
+    final int PLAYERWIN = 2;
+    final int AIWIN = 3;
+    final int STARTING_VALUE = -1;
+    int[][] gameBoard  = new int[3][3] ;
     static Random randomR = new Random();
     static Random randomC = new Random();
     int winner = -1;
@@ -62,7 +62,6 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-//TODO lav en AI, der kan se hvilke felter den må sætte et tegn på og så sæt det på et random sted.
         if(isGameOver())
         {
             return false;
@@ -112,12 +111,12 @@ public class GameBoardSinglePlayer implements IGameModel {
         if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()){
 
             if (player == 0){
-                winner = playerWin;
+                winner = PLAYERWIN;
 
             }
             else
             if(player == 1){
-                winner = aiWin;
+                winner = AIWIN;
             }
             return true;
         }
@@ -208,7 +207,7 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public void newGame() {
-        player = startingPlayer;
+        player = STARTINGPLAYER;
         gameBoardArray();
     }
 

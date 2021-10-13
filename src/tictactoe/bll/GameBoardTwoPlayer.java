@@ -11,10 +11,10 @@ import java.util.List;
  */
 public class GameBoardTwoPlayer implements IGameModel {
 
-    int startingPlayer = 1;
+    final int STARTINGPLAYER = 1;
     int player;
-    int STARTING_VALUE = -1;
-    int gameBoard[][]  = new int[3][3] ;
+    final int STARTING_VALUE = -1;
+    int[][] gameBoard  = new int[3][3] ;
     int winner = -1;
 
     protected GameBoardTwoPlayer()
@@ -67,7 +67,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        if(isGameOver() == true)
+        if(isGameOver())
         {
             return false;
         }
@@ -190,7 +190,7 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public void newGame() {
-        player = startingPlayer;
+        player = STARTINGPLAYER;
         gameBoardArray();
     }
 
